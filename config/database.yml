@@ -9,7 +9,7 @@ default: &default
   encoding: utf8mb4
   pool: 5
   username: root
-  password: password
+  password: <%= ENV['DB_PASSWORD'].presence || 'lpgasmaster_www_production' %>
   socket: /tmp/mysql.sock
   host: db
 
