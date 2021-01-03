@@ -82,5 +82,5 @@ jobs:
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: dockerrails
-        cluster: dockerrails
+        cluster: docker-rails
         wait-for-service-stability: true
