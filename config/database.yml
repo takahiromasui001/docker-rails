@@ -11,7 +11,7 @@ default: &default
   username: root
   password: <%= ENV['DB_PASSWORD'].presence || 'lpgasmaster_www_production' %>
   socket: /tmp/mysql.sock
-  host: db
+  host: <%= ENV.fetch('MYSQL_HOST', 'db') %>
 
 development:
   <<: *default
