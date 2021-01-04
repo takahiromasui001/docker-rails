@@ -75,15 +75,14 @@ jobs:
         task-definition: task-definition.json
         container-name: docker-rails
         image: ${{ steps.build-image.outputs.image }}
-    - name: Echo new task definition
-      id: echo-new
-      run: |
-        echo ${{ steps.task-def.outputs.task-definition }}
-
-    # - name: Deploy Amazon ECS task definition
-    #   uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-    #   with:
-    #     task-definition: ${{ steps.task-def.outputs.task-definition }}
-    #     service: dockerrails
-    #     cluster: docker-rails
-    #     wait-for-service-stability: true
+    # - name: Echo new task definition
+    #   id: echo-new
+    #   run: |
+        # echo ${{ steps.task-def.outputs.task-definition }}
+    - name: Deploy Amazon ECS task definition
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: dockerrails
+        cluster: docker-rails
+        wait-for-service-stability: true
