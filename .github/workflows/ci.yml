@@ -24,14 +24,14 @@ jobs:
       #     key: docker-save-${{ hashFiles('Dockerfile') }}
       #     restore-keys: |
       #       docker-cache-
-      - name: Cache docker image
-        id: cache-docker-image
-        uses: actions/cache@v2
-        with:
-          path: /tmp/cache/docker-image
-          key: docker-rails-${{ hashFiles('Dockerfile') }}
-          restore-keys: |
-            docker-rails-
+      # - name: Cache docker image
+      #   id: cache-docker-image
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: /tmp/cache/docker-image
+      #     key: docker-rails-${{ hashFiles('Dockerfile') }}
+      #     restore-keys: |
+      #       docker-rails-
       - name: compose-run
         env:
           DOCKER_BUILDKIT: 1
