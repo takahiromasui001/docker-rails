@@ -13,3 +13,5 @@ jobs:
       - name: compose-run
         run: |
           docker-compose up -d
+          docker-compose exec -T web /wait
+          docker-compose exec -T web bundle exec rubocop
