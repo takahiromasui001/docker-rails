@@ -17,21 +17,21 @@ jobs:
       # In this step, this action saves a list of existing images,
       # the cache is created without them in the post run.
       # It also restores the cache if it exists.
-      # - uses: satackey/action-docker-layer-caching@v0.0.11
-      #   # Ignore the failure of a step and avoid terminating the job.
-      #   continue-on-error: true
-      #   with:
-      #     key: docker-save-${{ hashFiles('Dockerfile') }}
-      #     restore-keys: |
-      #       docker-cache-
-      - name: Cache docker image
-        id: cache-docker-image
-        uses: actions/cache@v2
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        # Ignore the failure of a step and avoid terminating the job.
+        continue-on-error: true
         with:
-          path: /tmp/cache/docker-image
-          key: docker-rails-${{ hashFiles('Dockerfile') }}
+          key: docker-save-${{ hashFiles('Dockerfile') }}
           restore-keys: |
-            docker-rails-
+            docker-cache-
+      # - name: Cache docker image
+      #   id: cache-docker-image
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: /tmp/cache/docker-image
+      #     key: docker-rails-${{ hashFiles('Dockerfile') }}
+      #     restore-keys: |
+      #       docker-rails-
       - name: compose-run
         env:
           DOCKER_BUILDKIT: 1
