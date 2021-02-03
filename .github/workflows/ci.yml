@@ -21,9 +21,9 @@ jobs:
         uses: actions/cache@preview
         with:
           path: vendor/bundle
-          key: gem-${{ hashFiles('**/Gemfile.lock') }}
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
-            gem-
+            ${{ runner.os }}-gem-
       - name: bundle install
         run: |
           bundle install --jobs 4 --retry 3
