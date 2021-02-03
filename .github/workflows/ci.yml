@@ -10,21 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Cache docker image
-        id: cache-docker-image
-        uses: actions/cache@v2
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
         with:
-          path: /tmp/cache/docker-image
-          key: docker-rails-${{ hashFiles('Dockerfile') }}
-          restore-keys: |
-            docker-rails-
-      - name: compose-run
-        env:
-          COMPOSE_DOCKER_CLI_BUILD: 1
-          DOCKER_BUILDKIT: 1
+          version: 2.6.x
+      - name: Build
         run: |
-          docker-compose up --build
-
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+      - name: lint
+        run: bundle exec rubocop
+      - name: rspec
+        run: bundle exec rspec
 
       # Pull the latest image to build, and avoid caching pull-only images.
       # (docker pull is faster than caching in most cases.)
